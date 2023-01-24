@@ -1,18 +1,21 @@
 import { Link } from "react-router-dom";
+import  {useContext}  from "react"; 
+import UserContext from "../Context/UserContext";
 
-const Nav = (props) => {
+const Nav = () => {
+  const {user} = useContext(UserContext)
   return (
     <nav>
       {
-        props.user ? (
+        user ? (
           <>
             <Link to="/settings">Settings</Link>
             <Link to="/signout">Sign Out</Link>
           </>
         ) : (
           <Link className="signin" to="/signin">Sign In</Link>
-        )
-      }
+          )
+        }
     </nav>
   );
 }

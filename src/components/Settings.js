@@ -1,17 +1,26 @@
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import UserContext from "../Context/UserContext";
+
 
 //Components
 import DarkMode from "./themes/DarkMode";
 import AccentColor from "./themes/AccentColor";
 import FontSize from "./themes/FontSize";
 
-function Settings(props) {
+function Settings() {
   const navigate = useNavigate();
+  const {user} = useContext(UserContext)
+  const {isDarkMode} = useContext(UserContext)
+  const {toggleDarkMode} = useContext(UserContext)
+  const {updateAccentColor} = useContext(UserContext)
+  const {accentColor} = useContext(UserContext)
+  const {updateFontPercentage} = useContext(UserContext)
+  const {fontPercentage} = useContext(UserContext)
 
   // If the user isn't logged in navigate them to signin route
   useEffect(() => {
-    if (props.user === null) {
+    if (user === null) {
       navigate('/signin', { replace: true });
     }
   })
@@ -21,15 +30,15 @@ function Settings(props) {
       <div className="grid-100">
         <h1>Preferences</h1>
         <DarkMode
-          isDarkMode={props.isDarkMode}
-          toggleDarkMode={props.toggleDarkMode} />
+          isDarkMode={isDarkMode}
+          toggleDarkMode={toggleDarkMode} />
         <AccentColor
-          accentColor={props.accentColor}
-          updateAccentColor={props.updateAccentColor} />
+          accentColor={accentColor}
+          updateAccentColor={updateAccentColor} />
         <FontSize
-          accentColor={props.accentColor}
-          fontPercentage={props.fontPercentage}
-          updateFontPercentage={props.updateFontPercentage} />
+          accentColor={accentColor}
+          fontPercentage={fontPercentage}
+          updateFontPercentage={updateFontPercentage} />
       </div>
     </div>
   );
